@@ -40,6 +40,26 @@
   (check-equal? (total-squares-to 4) 15)
   (check-equal? (total-squares-to 5) 31))
 
+#|
+#lang racket
+
+(provide square total)
+
+(define (square a-square)
+  (expt 2 (- a-square 1)))
+
+(define (total)
+  (total-helperT 64 1))
+
+(define (total-helperT N total-so-far)
+  ;; helper function used to transform total into tail recursion
+  (cond
+       [(<= N 0) 0]
+       [(= N 1) total-so-far]
+       [else (total-helperT (- N 1) (+ (square N) total-so-far))]))
+
+|#
+
 (define (fact N)
   ;; calculate factorial using embeded recursion
   (cond

@@ -40,6 +40,23 @@
   (check-equal? (total-squares-to 4) 15)
   (check-equal? (total-squares-to 5) 31))
 
+#|
+
+#lang racket
+
+(provide two-fer)
+
+(define (two-fer name)
+  (if (equal? name "")
+      "One for you, one for me."
+      (format "One for ~a, one for me." name)))
+
+|#
+
+
+
+
+
 (define (fact N)
   ;; calculate factorial using embeded recursion
   (cond
