@@ -41,24 +41,32 @@
   (check-equal? (total-squares-to 5) 31))
 
 #|
-#lang racket
+Instructions
+Given a year, report if it is a leap year.
 
-(provide square
-         total)
+The tricky thing here is that a leap year in the Gregorian calendar occurs:
 
-(define (square a-square)
-  (expt 2 (- a-square 1)))
+on every year that is evenly divisible by 4
+  except every year that is evenly divisible by 100
+    unless the year is also evenly divisible by 400
+For example, 1997 is not a leap year, but 1996 is. 1900 is not a leap year, but 2000 is.
 
-(define (total)
-  (total-helperT 64 1))
+Notes
+Though our exercise adopts some very simple rules, there is more to learn!
 
-(define (total-helperT N total-so-far)
-  ;; helper function used to transform total into tail recursion
+For a delightful, four minute explanation of the whole leap year phenomenon, go watch this youtube video.
+
+(define (is-leap-year year)
   (cond
-    [(<= N 0) 0]
-    [(= N 1) total-so-far]
-    [else (total-helperT (- N 1) (+ (square N) total-so-far))]))
+    [(not (= (modulo year 4) 0)) #f]
+    [(and (= (modulo year 100) 0) (not (= (modulo year 400) 0))) #f]
+    [else #t]))
+
 |#
+
+
+
+
 
 (define (fact N)
   ;; calculate factorial using embeded recursion

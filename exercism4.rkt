@@ -41,24 +41,34 @@
   (check-equal? (total-squares-to 5) 31))
 
 #|
+Instructions
+Find the difference between the square of the sum and the sum of the squares of the first N natural numbers.
+
+The square of the sum of the first ten natural numbers is (1 + 2 + ... + 10)² = 55² = 3025.
+
+The sum of the squares of the first ten natural numbers is 1² + 2² + ... + 10² = 385.
+
+Hence the difference between the square of the sum of the first ten natural numbers and the sum of the squares of the first ten natural numbers is 3025 - 385 = 2640.
+
+You are not expected to discover an efficient solution to this yourself from first principles; research is allowed, indeed, encouraged. Finding the best algorithm for the problem is a key skill in software engineering.
+
 #lang racket
+(provide sum-of-squares square-of-sum difference)
+(define (sum-of-squares number)
+  (/ (* number (+ number 1) (+ (* number 2) 1)) 6))
+(define (square-of-sum number)
+  (expt (sum-of-naturals number) 2))
+(define (difference number)
+  (- (square-of-sum number) (sum-of-squares number)))
+(define (sum-of-naturals N)
+  (/ (* N (+ N 1)) 2))
 
-(provide square
-         total)
 
-(define (square a-square)
-  (expt 2 (- a-square 1)))
-
-(define (total)
-  (total-helperT 64 1))
-
-(define (total-helperT N total-so-far)
-  ;; helper function used to transform total into tail recursion
-  (cond
-    [(<= N 0) 0]
-    [(= N 1) total-so-far]
-    [else (total-helperT (- N 1) (+ (square N) total-so-far))]))
 |#
+
+
+
+
 
 (define (fact N)
   ;; calculate factorial using embeded recursion

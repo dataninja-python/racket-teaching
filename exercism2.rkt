@@ -41,16 +41,22 @@
   (check-equal? (total-squares-to 5) 31))
 
 #|
-
 #lang racket
 
 (provide two-fer)
 
-(define (two-fer name)
-  (if (equal? name "")
+(define (two-fer [name "you"])
+  ;; check if the function returns the proper values for two-fer problem
+  ;; 1) Is a string?
+  ;; 2) Is an empty string?
+  ;; 3) Is an all whitespace string?
+  ;; 4) Else, return the interpolated version
+  (if (string-empty? (string-trim name))
       "One for you, one for me."
       (format "One for ~a, one for me." name)))
 
+(define (string-empty? STR)
+  (= (string-length STR) 0))
 |#
 
 
